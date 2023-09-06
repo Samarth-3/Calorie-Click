@@ -3,7 +3,7 @@ import requests
 import os
 import bs4
 
-num_of_images = 150
+num_of_images = 310
 num_pages = (num_of_images // 20) + 1
 
 
@@ -16,9 +16,9 @@ def text_to_list(filename):
 def get_url(lot):
     base_url = {}
     for term in lot:
-        base_url[term] = (
-            "https://www.google.com/search?q=" + term + "&source=lnms&tbm=isch"
-        )
+        base_url[
+            term
+        ] = f"https://www.google.com/search?q={term}&sca_esv=563020551&ie=UTF-8&tbm=isch&ei=AEL4ZN6BJ5HYseMP18eb6Ac&start=0&sa=N"
     return base_url
 
 
@@ -27,15 +27,14 @@ def get_images_google(base_url, noi):
     for term in base_url:
         list_of_urls = []
         url = base_url[term]
+        print("Loading Pages...")
         for i in range(num_pages):
             try:
                 html = requests.get(url)
                 soup = bs4.BeautifulSoup(html.text, "html.parser")
                 links = list(soup.find_all("img"))
                 list_of_urls.extend(links)
-                url = "https://www.google.com" + soup.find(
-                    "a", attrs={"class": "frGj1b"}
-                ).get("href")
+                url = f"https://www.google.com/search?q={term}&sca_esv=563020551&ie=UTF-8&tbm=isch&ei=AEL4ZN6BJ5HYseMP18eb6Ac&start={20*(i+1)}&sa=N"
             except Exception as e:
                 print(e)
                 break
