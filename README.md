@@ -7,7 +7,10 @@ healthy lifestyle by taking pictures of their food and getting the calorie count
 
 # Table of Contents
 
+[Calorie Click](#calorie-click)
+<br>
 [Dowloading Images](#downloading-images)
+<br>
 [Dataset Creation](#dataset-creation)
 
 ## Downloading Images
