@@ -4,6 +4,7 @@ import os
 import bs4
 
 num_of_images = 150
+num_pages = num_of_images // 20
 
 
 def text_to_list(filename):
@@ -21,30 +22,33 @@ def get_url(lot):
     return base_url
 
 
-def get_images(base_url, noi):
+def get_images_google(base_url, noi):
+    # make sure to press the next button so that the images are loaded
     for term in base_url:
-        # get the url of the images
+        list_of_urls = []
         url = base_url[term]
-        # get the html of the url
-        html = requests.get(url)
-        # create a soup object
-        soup = bs4.BeautifulSoup(html.text, "html.parser")
-        # get the links of the images
-        links = soup.find_all("img")
-        # create a directory for the images
-        # download the images
+        for i in range(num_pages):
+            try:
+                html = requests.get(url)
+                soup = bs4.BeautifulSoup(html.text, "html.parser")
+                links = list(soup.find_all("img"))
+                list_of_urls.extend(links)
+                url = "https://www.google.com" + soup.find(
+                    "a", attrs={"class": "frGj1b"}
+                ).get("href")
+            except Exception as e:
+                print(e)
+                break
+
         i = 0
-        for _, link in enumerate(links):
+        for _, link in enumerate(list_of_urls):
             if i < noi:
-                # get the url of the image
                 img_url = link.get("src")
-                # download the image
                 try:
                     img = requests.get(img_url)
                 except:
                     print("Error downloading image: ", term + str(i) + ".jpg")
                     continue
-                # save the image
                 p_dir = os.path.abspath(os.path.join(os.pardir, "images"))
                 term_dir = os.path.join(p_dir, term)
                 os.makedirs(term_dir, exist_ok=True)
@@ -58,4 +62,4 @@ def get_images(base_url, noi):
 if __name__ == "__main__":
     list_of_terms = text_to_list("food.txt")
     base_url_ = get_url(list_of_terms)
-    get_images(base_url_, num_of_images)
+    get_images_google(base_url_, num_of_images)
