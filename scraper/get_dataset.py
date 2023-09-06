@@ -4,7 +4,7 @@ import os
 import bs4
 
 num_of_images = 150
-num_pages = num_of_images // 20
+num_pages = (num_of_images // 20) + 1
 
 
 def text_to_list(filename):
