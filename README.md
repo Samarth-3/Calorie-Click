@@ -12,6 +12,7 @@ healthy lifestyle by taking pictures of their food and getting the calorie count
 [Dowloading Images](#downloading-images)
 <br>
 [Dataset Creation](#dataset-creation)
+<br>
 
 ## Downloading Images
 
