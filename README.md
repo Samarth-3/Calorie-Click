@@ -7,6 +7,9 @@ healthy lifestyle by taking pictures of their food and getting the calorie count
 
 # Table of Contents
 
+[Dowloading Images](#downloading-images)
+[Dataset Creation](#dataset-creation)
+
 ## Downloading Images
 
 Check out the [scraper](scraper) folder for more details. But as a basic overview, the images are downloaded from
@@ -27,3 +30,7 @@ using the following command:
 ```bash
 python Dataset/split_categories.py
 ```
+
+# License
+
+[Apache License 2.0](./LICENSE)
