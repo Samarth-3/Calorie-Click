@@ -4,6 +4,11 @@ import random
 
 items = os.listdir(os.path.abspath(os.path.join(os.pardir, "images")))
 # create the folders
+# delete the folders if they exist
+shutil.rmtree("Train", ignore_errors=True)
+shutil.rmtree("Test", ignore_errors=True)
+shutil.rmtree("Validate", ignore_errors=True)
+
 os.makedirs("Train", exist_ok=True)
 os.makedirs("Test", exist_ok=True)
 os.makedirs("Validate", exist_ok=True)
@@ -25,8 +30,8 @@ for item in items:
     num_test = int(0.2 * num_images)
     num_validate = int(0.1 * num_images)
     train_images = images[:num_train]
-    test_images = images[num_train: num_train + num_test]
-    validate_images = images[num_train + num_test:]
+    test_images = images[num_train : num_train + num_test]
+    validate_images = images[num_train + num_test :]
     for image in train_images:
         shutil.copy(
             os.path.abspath(os.path.join(os.pardir, "images", item, image)),
