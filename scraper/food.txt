@@ -10,7 +10,7 @@ Naan
 AlooParatha
 PaniPuri
 VadaPav
-Dhokla
-GulabJamun
-Rasmalai
-Jalebi
+yellowDhokla
+GulabJamuninbowl
+Rasmalaiinbowl
+Jalebionplate

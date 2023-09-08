@@ -3,8 +3,7 @@ import shutil
 import random
 
 items = os.listdir(os.path.abspath(os.path.join(os.pardir, "images")))
-# create the folders
-# delete the folders if they exist
+train, test, validate = 0, 0, 0
 shutil.rmtree("Train", ignore_errors=True)
 shutil.rmtree("Test", ignore_errors=True)
 shutil.rmtree("Validate", ignore_errors=True)
@@ -37,13 +36,20 @@ for item in items:
             os.path.abspath(os.path.join(os.pardir, "images", item, image)),
             os.path.abspath(os.path.join("Train", item, image)),
         )
+        train += 1
     for image in test_images:
         shutil.copy(
             os.path.abspath(os.path.join(os.pardir, "images", item, image)),
             os.path.abspath(os.path.join("Test", item, image)),
         )
+        test += 1
     for image in validate_images:
         shutil.copy(
             os.path.abspath(os.path.join(os.pardir, "images", item, image)),
             os.path.abspath(os.path.join("Validate", item, image)),
         )
+
+        validate += 1
+print("Number of Images in Train: ", train)
+print("Number of Images in Test: ", test)
+print("Number of Images in Validate: ", validate)

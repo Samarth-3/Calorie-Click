@@ -3,7 +3,7 @@ import requests
 import os
 import bs4
 
-num_of_images = 310
+num_of_images = 630  # max limit for Google before it hallucinates
 num_pages = (num_of_images // 20) + 1
 
 
@@ -32,6 +32,8 @@ def get_images_google(base_url, noi):
             try:
                 html = requests.get(url)
                 soup = bs4.BeautifulSoup(html.text, "html.parser")
+                if i % 10 == 0:
+                    print("Loaded Page: ", i)
                 links = list(soup.find_all("img"))
                 list_of_urls.extend(links)
                 url = f"https://www.google.com/search?q={term}&sca_esv=563020551&ie=UTF-8&tbm=isch&ei=AEL4ZN6BJ5HYseMP18eb6Ac&start={20*(i+1)}&sa=N"
@@ -46,7 +48,6 @@ def get_images_google(base_url, noi):
                 try:
                     img = requests.get(img_url)
                 except:
-                    print("Error downloading image: ", term + str(i) + ".jpg")
                     continue
                 p_dir = os.path.abspath(os.path.join(os.pardir, "images"))
                 term_dir = os.path.join(p_dir, term)
@@ -54,7 +55,8 @@ def get_images_google(base_url, noi):
                 image_filename = os.path.join(term_dir, term + str(i) + ".jpg")
                 with open(image_filename, "wb") as f:
                     f.write(img.content)
-                    print("Image downloaded: ", term + str(i) + ".jpg")
+                    if i % 100 == 0:
+                        print("Downloaded: ", term + str(i) + ".jpg")
                     i += 1
 
 
