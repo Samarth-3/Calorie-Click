@@ -16,5 +16,3 @@ async def sample_query(message: str = "Hello World"):
     localhost:8000/sample_query?message=message
     """
     return {"Message": message}
-
-
