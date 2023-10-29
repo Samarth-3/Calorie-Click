@@ -7,11 +7,11 @@ app = FastAPI()
 # Define the origins, methods, and headers that are allowed to access your API
 # You can adjust these lists to match your requirements
 origins = [
-    "*"
+    "http://localhost:3000"
 ]
 
-allowed_methods = ["GET", "POST", "PUT", "DELETE"]  # Adjust as needed
-allowed_headers = ["Content-Type", "Authorization", "application/json"]  # Include "application/json"
+allowed_methods = ["*"]  # Adjust as needed
+allowed_headers = ["*"]  # Include "application/json"
 
 app.add_middleware(
     CORSMiddleware,
@@ -53,5 +53,4 @@ async def predict_class(base64_image: dict):
         )
         return {"top_classes": top_classes}
     except Exception as e:
-        print(e)
         raise HTTPException(status_code=500, detail=str(e))

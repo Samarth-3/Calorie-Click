@@ -103,7 +103,6 @@ def predict(image_string, topk=5, train_on_gpu=False, n_classes=20):
     if train_on_gpu:
         img_tensor = img_tensor.view(1, 3, 224, 224).cuda()
     else:
-        print(img_tensor)
         img_tensor = img_tensor.view(1, 3, 224, 224)
 
     # Set to evaluation
