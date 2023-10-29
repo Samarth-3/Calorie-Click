@@ -35,18 +35,11 @@ def process_image(image_string):
     image = decode_base64_image(image_string)
     img = image.resize((256, 256))
 
-    # Center crop
-    width = 256
-    height = 256
-    new_width = 224
-    new_height = 224
-
     left = 32 // 2  # 256 - 224
     top = 32 // 2
     right = 32 // 2
     bottom = 32 // 2
-    img = img.crop((left, top, right, bottom))
-
+    img = img.crop((left, top, img.width - right, img.height - bottom))
     img = np.array(img).transpose((2, 0, 1)) / 256
 
     means = np.array([0.485, 0.456, 0.406]).reshape((3, 1, 1))
@@ -110,6 +103,7 @@ def predict(image_string, topk=5, train_on_gpu=False, n_classes=20):
     if train_on_gpu:
         img_tensor = img_tensor.view(1, 3, 224, 224).cuda()
     else:
+        print(img_tensor)
         img_tensor = img_tensor.view(1, 3, 224, 224)
 
     # Set to evaluation
@@ -140,7 +134,7 @@ def load_model(n_classes=20, model_on_gpu=False, multi_gpu=False):
         nn.LogSoftmax(dim=1),
     )
     if model_on_gpu:
-        model_dict = torch.load("resnet50-pretrain_old.pt")
+        model_dict = torch.load("model/resnet50-pretrain_old.pt")
     else:
         model_dict = torch.load("model/resnet50-pretrain_old.pt", map_location="cpu")
 
