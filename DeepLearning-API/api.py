@@ -1,13 +1,29 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from model.model_architecture import predict
 
 app = FastAPI()
 
+# Define the origins, methods, and headers that are allowed to access your API
+# You can adjust these lists to match your requirements
+origins = [
+    "*"
+]
+
+allowed_methods = ["GET", "POST", "PUT", "DELETE"]  # Adjust as needed
+allowed_headers = ["Content-Type", "Authorization", "application/json"]  # Include "application/json"
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=allowed_methods,
+    allow_headers=allowed_headers,
+)
 
 @app.get("/")
 async def root():
     return {"Message": "This is a test message"}
-
 
 @app.get("/sample_query")
 async def sample_query(message: str = "Hello World"):
@@ -17,7 +33,6 @@ async def sample_query(message: str = "Hello World"):
     """
     return {"Message": message}
 
-
 @app.post("/predict")
 async def predict_class(base64_image: dict):
     """
@@ -25,7 +40,6 @@ async def predict_class(base64_image: dict):
     localhost:8000/predict
     """
     try:
-        print(base64_image)
         base64_image = base64_image.get("base64_image")
         if not base64_image:
             raise HTTPException(
@@ -39,4 +53,5 @@ async def predict_class(base64_image: dict):
         )
         return {"top_classes": top_classes}
     except Exception as e:
+        print(e)
         raise HTTPException(status_code=500, detail=str(e))
