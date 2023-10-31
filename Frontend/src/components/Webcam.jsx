@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
 import Webcam from "react-webcam";
 import styled from "styled-components";
-import axios from "axios";
+import Modal from "./Modal";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -96,12 +97,25 @@ function ImageCapture() {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const [isWebcamReady, setIsWebcamReady] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isFileInputDisabled, setFileInputDisabled] = useState(false);
+  const [isPictureTaken, setPictureTaken] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   const captureImage = () => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
       setCapturedImage(imageSrc);
       setIsSubmitEnabled(true);
+      setFileInputDisabled(true);
+      setPictureTaken(true);
     }
   };
 
@@ -112,6 +126,7 @@ function ImageCapture() {
     reader.onload = (event) => {
       setUploadedImage(event.target.result);
       setIsSubmitEnabled(true);
+      setIsWebcamReady(false); // Disable webcam after uploading
     };
     reader.readAsDataURL(file);
   };
@@ -142,16 +157,19 @@ function ImageCapture() {
           })
           .then((data) => {
             console.log("Response from API:", data);
-            // Handle the API response data here
           })
           .catch((error) => {
             console.error("Error sending request:", error);
-            // Handle the error here
           });
       } else {
         console.error("Failed to convert the image to Base64");
       }
     }
+    setIsWebcamReady(true);
+    setPictureTaken(false);
+    setFileInputDisabled(false);
+    setCapturedImage(null);
+    setUploadedImage(null);
   };
 
   return (
@@ -165,9 +183,9 @@ function ImageCapture() {
         screenshotFormat="image/jpeg"
         onUserMedia={() => setIsWebcamReady(true)}
       />
-      {/* ... styled components for buttons, images, and webcam */}
+
       <div>
-        <CaptureButton onClick={captureImage} disabled={!isWebcamReady}>
+        <CaptureButton onClick={captureImage} disabled={!isWebcamReady || isPictureTaken}>
           Capture Image
         </CaptureButton>
         <StyledFileInput
@@ -175,11 +193,21 @@ function ImageCapture() {
           accept="image/*"
           onChange={handleImageUpload}
           id="fileInput"
+          disabled={isFileInputDisabled || isPictureTaken}
         />
         <FileInputLabel htmlFor="fileInput">Upload Image</FileInputLabel>
-        <SubmitButton onClick={handleClick} disabled={!isSubmitEnabled}>
+        <SubmitButton
+          onClick={() => {
+            handleClick();
+            openModal();
+          }}
+          disabled={!isSubmitEnabled}
+        >
           Submit
         </SubmitButton>
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <h2>Choose Most Appropriate Prediction</h2>
+        </Modal>
       </div>
       {capturedImage && (
         <PreviewImage src={capturedImage} alt="Captured Image" />
