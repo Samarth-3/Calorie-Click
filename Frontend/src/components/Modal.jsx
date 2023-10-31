@@ -13,7 +13,6 @@ const ModalWrapper = styled.div`
   background: rgba(0, 0, 0, 0.5);
 `;
 
-
 const ModalContent = styled.div`
   background: #fff;
   padding: 60px; 
@@ -51,7 +50,7 @@ const Button = styled.button`
   margin: 5px; 
 `;
 
-const Modal = ({ isOpen, onClose, children }) => {
+const Modal = ({ isOpen, onClose, children, topClasses }) => {
   if (!isOpen) return null;
 
   return (
@@ -59,9 +58,9 @@ const Modal = ({ isOpen, onClose, children }) => {
       <ModalContent>
         {children}
         <HorizontalButtons>
-          <Button>Button 1</Button>
-          <Button>Button 2</Button>
-          <Button>Button 3</Button>
+          {topClasses.map((foodItem, index) => (
+            <Button key={index}>{foodItem}</Button>
+          ))}
         </HorizontalButtons>
         <CloseButton onClick={onClose}>Close</CloseButton>
       </ModalContent>
