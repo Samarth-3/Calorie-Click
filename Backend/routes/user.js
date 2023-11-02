@@ -31,7 +31,7 @@ router.put("/update/:id", verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 
-//DELETE 
+//DELETE
 router.delete("/delete/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);
@@ -52,16 +52,15 @@ router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
-
 //GET ALL USER
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
-    try {
-      const user = await User.find();
-      res.status(200).json(user);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+  try {
+    const user = await User.find();
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 //get user stats
 router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
@@ -69,7 +68,8 @@ router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
 
   try {
-    const data = await User.aggregate([ //aggregate is used to get data from database
+    const data = await User.aggregate([
+      //aggregate is used to get data from database
       { $match: { createdAt: { $gte: lastYear } } }, //gte is greater than or equal to
       {
         $project: {
@@ -83,11 +83,10 @@ router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
         },
       },
     ]);
-    res.status(200).json(data)
+    res.status(200).json(data);
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
 
 module.exports = router;
