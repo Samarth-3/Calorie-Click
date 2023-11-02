@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Axios from 'axios';
 
 const ModalWrapper = styled.div`
   display: flex;
@@ -53,13 +54,36 @@ const Button = styled.button`
 const Modal = ({ isOpen, onClose, children, topClasses }) => {
   if (!isOpen) return null;
 
+  const handleButtonClick = (foodItem) => {
+    const foodData = {
+      userId: '65422ac98aa48eacd107f7b2', // Replace with the actual user ID
+      FoodItemName: foodItem,
+    };
+  
+    Axios.post('http://localhost:5000/api/imgs/add', foodData, {
+      headers: {
+        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NDIyMzIyZGQ0NGUzNGZkNDYwNjA5MiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY5ODgzMzczOSwiZXhwIjoxNjk5MjY1NzM5fQ.xXgR2M-x_UmtgcjCqxyr9W_Oc0DHirEd27nEkfV7ilw', // Replace with the actual JWT token
+      },
+    })
+      .then((response) => {
+        console.log('Food data saved successfully:', response.data);
+        // Handle success
+      })
+      .catch((error) => {
+        console.error('Failed to save food data:', error);
+        // Handle error
+      });
+  };
+
   return (
     <ModalWrapper>
       <ModalContent>
         {children}
         <HorizontalButtons>
           {topClasses.map((foodItem, index) => (
-            <Button key={index}>{foodItem}</Button>
+            <Button key={index} onClick={() => handleButtonClick(foodItem)}>
+            {foodItem}
+          </Button>
           ))}
         </HorizontalButtons>
         <CloseButton onClick={onClose}>Close</CloseButton>
