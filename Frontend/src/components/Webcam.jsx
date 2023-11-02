@@ -100,7 +100,7 @@ function ImageCapture() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isFileInputDisabled, setFileInputDisabled] = useState(false);
   const [isPictureTaken, setPictureTaken] = useState(false);
-  const [foodItems, setFoodItems] = useState([]); 
+  const [foodItems, setFoodItems] = useState([]);
 
   const openModal = () => {
     setModalOpen(true);
@@ -187,7 +187,10 @@ function ImageCapture() {
       />
 
       <div>
-        <CaptureButton onClick={captureImage} disabled={!isWebcamReady || isPictureTaken}>
+        <CaptureButton
+          onClick={captureImage}
+          disabled={!isWebcamReady || isPictureTaken}
+        >
           Capture Image
         </CaptureButton>
         <StyledFileInput
@@ -199,17 +202,17 @@ function ImageCapture() {
         />
         <FileInputLabel htmlFor="fileInput">Upload Image</FileInputLabel>
         <SubmitButton
-        onClick={() => {
-          handleClick();
-          // openModal(top_classes); // Pass top_classes to the Modal
-        }}
-        disabled={!isSubmitEnabled}
-      >
-        Submit
-      </SubmitButton>
-      <Modal isOpen={isModalOpen} onClose={closeModal} topClasses={foodItems}>
-        <h2>Choose Most Appropriate Prediction</h2>
-      </Modal>
+          onClick={() => {
+            handleClick();
+            // openModal(top_classes); // Pass top_classes to the Modal
+          }}
+          disabled={!isSubmitEnabled}
+        >
+          Submit
+        </SubmitButton>
+        <Modal isOpen={isModalOpen} onClose={closeModal} topClasses={foodItems}>
+          <h2>Choose Most Appropriate Prediction</h2>
+        </Modal>
       </div>
       {capturedImage && (
         <PreviewImage src={capturedImage} alt="Captured Image" />
