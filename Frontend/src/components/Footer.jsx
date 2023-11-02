@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import pfp from '../pfp.png';
+
+import AryanGarg from '../Images/AryanGarg.png';
+import SamarthPaliwal from '../Images/SamarthPaliwal.jpg';
+
 const FooterWrapper = styled.footer`
   background-color: #333;
   color: #fff;
@@ -63,25 +66,25 @@ function Footer() {
   return (
     <FooterWrapper>
       <Contributor>
-      <Photo src={pfp} alt="Contributor 1" />
+        <Photo src={AryanGarg} alt="Aryan Garg Picture" />
         <Info>
           <Name>Aryan Garg</Name>
           <RollNo>Roll No: 1012103768</RollNo>
           <Email>Email: aryan.raj.garg@gmail.com</Email>
           <Contribution>Contribution: Front-end development</Contribution>
-          <LinkedInLink href="https://www.linkedin.com/in/contributor1" target="_blank">
+          <LinkedInLink href="https://www.linkedin.com/in/aryangarg401/" target="_blank">
             LinkedIn Profile
           </LinkedInLink>
         </Info>
       </Contributor>
       <Contributor>
-      <Photo src={pfp} alt="Contributor 2" />
+        <Photo src={SamarthPaliwal} alt="Samarth Paliwal Picture" />
         <Info>
           <Name>Samarth Paliwal</Name>
           <RollNo>Roll No: 102103775</RollNo>
           <Email>Email: samarthpaliwal3@gmail.com</Email>
           <Contribution>Contribution: Back-end development</Contribution>
-          <LinkedInLink href="https://www.linkedin.com/in/contributor2" target="_blank">
+          <LinkedInLink href="https://www.linkedin.com/in/samarthpaliwal03/" target="_blank">
             LinkedIn Profile
           </LinkedInLink>
         </Info>
