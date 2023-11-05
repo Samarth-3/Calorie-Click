@@ -33,15 +33,17 @@ const HeadingText = styled.p`
 `;
 
 function Navbar() {
-  const userid = useSelector((state) => state.user.currentUser);
-  console.log(userid);
+  const user = useSelector((state) => state.user.currentUser);
+
+  const userId = user._id; 
+  console.log(userId);
   return (
     <NavbarWrapper>
       <BrandText>
         <Link to="/">Calorie Click</Link>
       </BrandText>
       <HeadingText>
-        <Link to={`/nutrientlog/65438597c946bb170ab03311`}>Past log</Link>
+        <Link to={`/nutrientlog/${userId}`}>Past log</Link>
       </HeadingText>
     </NavbarWrapper>
   );

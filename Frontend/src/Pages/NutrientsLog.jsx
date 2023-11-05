@@ -2,7 +2,7 @@
 import React from 'react';
 import NutritionalInfo from '../components/Info';
 
-const PastLog = () => {
+const NutrientsLog = () => {
   return (
     <div>
       <NutritionalInfo period="today" />
@@ -12,4 +12,4 @@ const PastLog = () => {
   );
 };
 
-export default PastLog;
+export default NutrientsLog;

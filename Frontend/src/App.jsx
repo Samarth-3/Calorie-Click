@@ -14,6 +14,7 @@ function App() {
       <Route exact path="/" element={<Home />} />
       <Route exact path="/login" element={user ? <Navigate to="/" /> : <Login />} />
       <Route exact path="/NutrientsLog" element={<NutrientsLog />} />
+      <Route exact path="/nutrientlog/:userId" element={<NutrientsLog />} />
     </Routes>
   </Router>
   );

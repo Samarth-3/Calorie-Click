@@ -6,7 +6,7 @@ const foodData = [
       fiber: 2.1   // Dietary fiber content in grams
     },
     {
-      name: "Vada Pav",
+      name: "VadaPav",
       protein: 6.8,
       carbs: 51,
       fiber: 3.2
@@ -19,7 +19,7 @@ const foodData = [
     },
     {
       name: "PaniPuri",
-      protein: 14.3,
+      protein: 21.3,
       carbs: 58,
       fiber: 7.5
     },

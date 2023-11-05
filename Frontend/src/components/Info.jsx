@@ -1,7 +1,7 @@
-// src/components/NutritionalInfo.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import foodData from '../Data'; // Import your data.js file
+import foodData from '../Data'; 
+import { useSelector } from 'react-redux';
 
 const NutritionalInfo = ({ period }) => {
   const [foodEaten, setFoodEaten] = useState([]);
@@ -11,18 +11,21 @@ const NutritionalInfo = ({ period }) => {
     fiber: 0,
   });
 
+  const userId = useSelector((state) => state.user.currentUser)._id;
+
   useEffect(() => {
-    // Define the URL based on the selected period
+
     let apiUrl;
     if (period === 'today') {
-      apiUrl = 'http://localhost:5000/api/nutrientlog/today';
+        console.log('userId: ', userId)
+      apiUrl = `http://localhost:5000/api/nutrientlog/today/${userId}`;
     } else if (period === 'week') {
-      apiUrl = 'http://localhost:5000/api/nutrientlog/week';
+      apiUrl = `http://localhost:5000/api/nutrientlog/week/${userId}`;
     } else if (period === 'month') {
-      apiUrl = 'http://localhost:5000/api/nutrientlog/month';
+      apiUrl = `http://localhost:5000/api/nutrientlog/month/${userId}`;
     }
 
-    // Fetch the food data from the backend based on the selected period
+    // Fetch the food data from the backend based on the selected period and user's ID
     axios.get(apiUrl).then((response) => {
       setFoodEaten(response.data);
 
@@ -45,7 +48,7 @@ const NutritionalInfo = ({ period }) => {
 
       setTotals(newTotals);
     });
-  }, [period]);
+  }, [period, userId]);
 
   return (
     <div>
