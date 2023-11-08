@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Img = require("../models/Img"); // Your Mongoose model
+const Img = require("../models/Img"); 
 
 // Route to get today's food data for a specific user
 router.get('/today/:userId', async (req, res) => {
@@ -9,7 +9,7 @@ router.get('/today/:userId', async (req, res) => {
     const endOfDay = new Date();
     endOfDay.setHours(23, 59, 59, 999);
   
-    const userId = req.params.userId; // Get the user's ID from the request parameters
+    const userId = req.params.userId; 
   
     try {
       const foodEaten = await Img.find({

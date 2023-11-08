@@ -26,7 +26,7 @@ const foodData = [
     {
       name: "Jalebionplate",
       protein: 14.3,
-      carbs: 58,
+      carbs: 52,
       fiber: 7.5
     }
   ];

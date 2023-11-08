@@ -17,8 +17,8 @@ const BrandText = styled.p`
   margin: 0;
 
   a {
-    text-decoration: none; /* Remove the underline */
-    color: inherit; /* Inherit the color from the parent */
+    text-decoration: none; 
+    color: inherit; 
   }
 `;
 
@@ -27,8 +27,8 @@ const HeadingText = styled.p`
   margin: 0;
 
   a {
-    text-decoration: none; /* Remove the underline */
-    color: inherit; /* Inherit the color from the parent */
+    text-decoration: none; 
+    color: inherit; 
   }
 `;
 

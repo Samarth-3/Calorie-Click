@@ -25,7 +25,6 @@ const NutritionalInfo = ({ period }) => {
       apiUrl = `http://localhost:5000/api/nutrientlog/month/${userId}`;
     }
 
-    // Fetch the food data from the backend based on the selected period and user's ID
     axios.get(apiUrl).then((response) => {
       setFoodEaten(response.data);
 
