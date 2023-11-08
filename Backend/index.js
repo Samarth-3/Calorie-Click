@@ -24,10 +24,12 @@ mongoose
     console.log("Error connecting to the database", err);
   });
 
+
 app.use(cors(corsOptions));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/users", require("./routes/user"));
 app.use("/api/imgs", require("./routes/img"));
+app.use("/api/nutrientlog", require("./routes/nutrientlog"));
 
 const port = 5000;
 
