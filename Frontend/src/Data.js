@@ -1,89 +1,116 @@
 const foodData = [
     {
         name: "Samosas",
-        protein: 4.5, // Protein content in grams
-        carbs: 22,   // Carbohydrate content in grams
-        fiber: 2.1   // Dietary fiber content in grams
+        calories: 260,
+        protein: 4.5,
+        carbs: 22,
+        fats: 14.5,
+        fiber: 2.1,
     },
     {
         name: "VadaPav",
+        calories: 445,
         protein: 6.8,
         carbs: 51,
-        fiber: 3.2
+        fats: 16.3,
+        fiber: 3.2,
     },
     {
         name: "CholeBhature",
-        protein: 14.3,
-        carbs: 58,
-        fiber: 7.5
+        calories: 510,
+        protein: 12,
+        carbs: 65,
+        fats: 25,
+        fiber: 8,
     },
     {
         name: "PaniPuri",
-        protein: 21.3,
-        carbs: 58,
-        fiber: 7.5
+        calories: 160,
+        protein: 1.2,
+        carbs: 20,
+        fats: 8,
+        fiber: 0.6,
     },
     {
         name: "Jalebionplate",
-        protein: 14.3,
-        carbs: 52,
-        fiber: 7.5
+        calories: 370,
+        protein: 2.3,
+        carbs: 70,
+        fats: 16.8,
+        fiber: 1.8,
     },
     {
         name: "AlooParatha",
+        calories: 320,
         protein: 5,
         carbs: 35,
-        fiber: 3
+        fats: 15,
+        fiber: 3,
     },
     {
         name: "Biryani",
+        calories: 435,
         protein: 20,
         carbs: 31,
-        fiber: 1.4
+        fats: 14.5,
+        fiber: 1.4,
     },
     {
         name: "ButterChicken",
+        calories: 385,
         protein: 26.5,
         carbs: 12.8,
-        fiber: 1.7
+        fats: 18.2,
+        fiber: 1.7,
     },
     {
         name: "DalMakhani",
+        calories: 320,
         protein: 8.5,
         carbs: 24,
-        fiber: 6.9
+        fats: 14.5,
+        fiber: 6.9,
     },
     {
         name: "Dosa",
+        calories: 150,
         protein: 3.9,
         carbs: 29,
-        fiber: 0.9
+        fats: 3.5,
+        fiber: 0.9,
     },
     {
         name: "GulabJamuninbowl",
+        calories: 385,
         protein: 2,
         carbs: 54.4,
-        fiber: 0.6
+        fats: 12.7,
+        fiber: 0.6,
     },
     {
-        name: "Idli", // stats for 3 idli
+        name: "Idli",
+        calories: 150,
         protein: 4.8,
         carbs: 0.1,
-        fiber: 36
+        fats: 2.6,
+        fiber: 36,
     },
     {
         name: "Naan",
+        calories: 325,
         protein: 9,
         carbs: 45,
-        fiber: 2
+        fats: 7.5,
+        fiber: 2,
     },
     {
         name: "PaneerTikka",
+        calories: 280,
         protein: 17,
         carbs: 14.3,
-        fiber: 0.7
+        fats: 13.1,
+        fiber: 0.7,
     }
 ];
 
 export default foodData;
-  
