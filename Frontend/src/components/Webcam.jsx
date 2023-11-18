@@ -176,12 +176,12 @@ function ImageCapture() {
 
   return (
     <Container>
-      <h1>👇 Upload Food Image👇</h1>
+      <h1>👇Upload Food Image👇</h1>
       <Webcam
         audio={false}
         ref={webcamRef}
-        width={640} /* Adjust width as needed */
-        height={480} /* Adjust height as needed */
+        width={375} /* Adjust width as needed */
+        height={350} /* Adjust height as needed */
         screenshotFormat="image/jpeg"
         onUserMedia={() => setIsWebcamReady(true)}
       />

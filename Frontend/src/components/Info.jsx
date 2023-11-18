@@ -116,7 +116,7 @@ const NutritionalInfo = ({ period }) => {
   }, [period, userId]);
 
   const maxIntake = {
-    day: {
+    today: {
       calories: 2000,
       protein: 85, // Daily average intake for men
       carbs: 270,

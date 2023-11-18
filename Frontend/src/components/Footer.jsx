@@ -71,7 +71,7 @@ function Footer() {
           <Name>Aryan Garg</Name>
           <RollNo>Roll No: 1012103768</RollNo>
           <Email>Email: aryan.raj.garg@gmail.com</Email>
-          <Contribution>Contribution: Front-end development</Contribution>
+          <Contribution>Contribution: ML Model</Contribution>
           <LinkedInLink href="https://www.linkedin.com/in/aryangarg401/" target="_blank">
             LinkedIn Profile
           </LinkedInLink>
@@ -83,7 +83,7 @@ function Footer() {
           <Name>Samarth Paliwal</Name>
           <RollNo>Roll No: 102103775</RollNo>
           <Email>Email: samarthpaliwal3@gmail.com</Email>
-          <Contribution>Contribution: Back-end development</Contribution>
+          <Contribution>Contribution: Frontend and Backend</Contribution>
           <LinkedInLink href="https://www.linkedin.com/in/samarthpaliwal03/" target="_blank">
             LinkedIn Profile
           </LinkedInLink>
