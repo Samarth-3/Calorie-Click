@@ -13,9 +13,10 @@ router.post("/add", verifyToken, async (req, res) => {
   const newImg = new Img(req.body);
   try {
     const savedImg = await newImg.save();
-    res.status(200).json(savedImg);
+    // res.status(200).json(savedImg);
   } catch (err) {
-    res.status(500).json(err);
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
