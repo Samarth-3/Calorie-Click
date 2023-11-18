@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../redux/userRedux";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
@@ -17,50 +16,57 @@ const NavbarWrapper = styled.nav`
 
 const BrandText = styled.p`
   font-size: 24px;
+  font-weight: bold;
   margin: 0;
 
   a {
-    text-decoration: none; 
-    color: inherit; 
+    text-decoration: none;
+    color: inherit;
   }
 `;
 
-const HeadingText = styled.p`
+const ButtonContainer = styled.div`
+  display: flex; /* Arrange buttons horizontally */
+`;
+
+const TextLink = styled.p`
   font-size: 20px;
   margin: 0;
+  margin-right: 20px; /* Add some spacing between buttons */
 
   a {
-    text-decoration: none; 
-    color: inherit; 
+    text-decoration: none;
+    color: inherit;
   }
 `;
 
 function Navbar() {
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.currentUser);
+  const userId = user._id;
 
   const handleLogOut = () => {
     dispatch(removeUser());
     navigate("/login");
   };
 
-
-  const userId = user._id; 
-  console.log(userId);
   return (
     <NavbarWrapper>
-      
-      <HeadingText>
-      <Link to="/login" onClick={handleLogOut}>LogOut</Link>
-      </HeadingText>
       <BrandText>
         <Link to="/">Calorie Click</Link>
       </BrandText>
-      <HeadingText>
-        <Link to={`/nutrientlog/${userId}`}>Past log</Link>
-      </HeadingText>
+      <ButtonContainer>
+        <TextLink>
+          <Link to="/login" onClick={handleLogOut}>LogOut</Link>
+        </TextLink>
+        <TextLink>
+          <Link to="/UserManual">User Manual</Link>
+        </TextLink>
+        <TextLink>
+          <Link to={`/nutrientlog/${userId}`}>Past Log</Link>
+        </TextLink>
+      </ButtonContainer>
     </NavbarWrapper>
   );
 }
