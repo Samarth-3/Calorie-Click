@@ -132,10 +132,16 @@ def load_model(n_classes=20, model_on_gpu=False, multi_gpu=False):
         nn.Linear(256, n_classes),
         nn.LogSoftmax(dim=1),
     )
-    if model_on_gpu:
-        model_dict = torch.load("model/resnet50-pretrain_old.pt")
+    if n_classes == 14:
+        model_path = "model/resnet50-pretrain_old.pt"
+    elif n_classes == 20:
+        model_path = "model/resnet50-pretrain_new.pt"
     else:
-        model_dict = torch.load("model/resnet50-pretrain_old.pt", map_location="cpu")
+        raise ValueError("Invalid number of classes")
+    if model_on_gpu:
+        model_dict = torch.load(model_path)
+    else:
+        model_dict = torch.load(model_path, map_location="cpu")
 
     if multi_gpu:
         model = nn.DataParallel(model_dict.load_state_dict(model))
