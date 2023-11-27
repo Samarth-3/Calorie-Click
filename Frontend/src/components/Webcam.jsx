@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import Webcam from "react-webcam";
 import styled from "styled-components";
 import Modal from "./Modal";
+import l from '../Images/l.mp4';
 
 const Container = styled.div`
   display: flex;
@@ -13,6 +14,24 @@ const Container = styled.div`
 
 const StyledFileInput = styled.input`
   display: none; /* Hide the file input */
+`;
+
+const FullScreenLoader = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Set a high z-index to ensure it's above other elements */
+`;
+
+const LoaderVideo = styled.video`
+  width: 420px; /* Adjust the width as needed */
+  height: 420px; /* Adjust the height as needed */
 `;
 
 const FileInputLabel = styled.label`
@@ -91,7 +110,31 @@ const PreviewImage = styled.img`
   border-radius: 5px;
 `;
 
-function ImageCapture() {
+
+function App() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLoading = (loading) => {
+    setIsLoading(loading);
+  };
+
+  return (
+    <>
+      {isLoading && (
+        <FullScreenLoader>
+          {/* Your custom loader component with video */}
+          <LoaderVideo autoPlay loop muted>
+            <source src={l} type="video/mp4" />
+            Your browser does not support the video tag.
+          </LoaderVideo>
+        </FullScreenLoader>
+      )}
+      <ImageCapture onLoading={handleLoading} />
+    </>
+  );
+}
+
+function ImageCapture({onLoading}) {
   const webcamRef = useRef(null);
   const [capturedImage, setCapturedImage] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -133,6 +176,7 @@ function ImageCapture() {
   };
 
   const handleClick = () => {
+    onLoading(true);
     if (capturedImage || uploadedImage) {
       let imageData = capturedImage || uploadedImage;
       const base64Image = imageData;
@@ -158,9 +202,11 @@ function ImageCapture() {
           })
           .then((data) => {
             setFoodItems(data.top_classes);
+            onLoading(false);
             openModal();
           })
           .catch((error) => {
+            onLoading(false);
             console.error("Error sending request:", error);
           });
       } else {
@@ -202,14 +248,11 @@ function ImageCapture() {
         />
         <FileInputLabel htmlFor="fileInput">Upload Image</FileInputLabel>
         <SubmitButton
-          onClick={() => {
-            handleClick();
-            // openModal(top_classes); // Pass top_classes to the Modal
-          }}
-          disabled={!isSubmitEnabled}
-        >
-          Submit
-        </SubmitButton>
+        onClick={handleClick}
+        disabled={!isSubmitEnabled}
+      >
+        Submit
+      </SubmitButton>
         <Modal isOpen={isModalOpen} onClose={closeModal} topClasses={foodItems}>
           <h2>Choose Most Appropriate Prediction</h2>
         </Modal>
@@ -224,4 +267,4 @@ function ImageCapture() {
   );
 }
 
-export default ImageCapture;
+export default App;
